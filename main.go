@@ -1,9 +1,10 @@
 package main
 
+//ctrl+c to exit code run
 import (
 	"net/http"
 
-	"github.com/pluralsight/webservice/controllers"
+	"github.com/thomasfan100/Go_Code_Pluralsight/controllers"
 )
 
 func main() {
@@ -158,5 +159,102 @@ const (
 		fmt.Println("Number of retries", numberOfRetries)
 		return port,nil
 		//return errors.New("Something went wrong")
+	}
+*/
+//loop til condition
+/*
+
+	var i int
+	for i < 5 {
+		println(i)
+		i++
+		if i == 3 {
+			break
+		}
+		continue
+
+*/
+//loop til condition with a post clause
+/*
+	for i := 0;i < 5 ; i++{
+		println(i)
+	}
+*/
+//infinite loop
+/*
+var i int
+	//or remove the two semicolons
+	for ; ;{
+		if i == 5 {
+		 	break
+		}
+		println(i)
+		i++
+	}
+*/
+//looping over iterables
+/*
+	slice := []int{1,2,3}
+	for i := 0; i < len(slice); i++ {
+		println(slice[i])
+	}
+	for i,v := range slice {
+		println(i,v)
+	}
+	wellKnownPorts:= map[string]int{"http":80,"https":443}
+	for k,o := range wellKnownPorts{
+		println(k,o)
+	}
+	wellKnownPorts2:= map[string]int{"http":80,"https":443}
+	for _,o := range wellKnownPorts2{
+		println(o)
+	}
+*/
+//panic functions
+//panic("Something bad just happened")
+//if and else
+/*
+	type User struct{
+	ID int
+	FirstName string
+	LastName string
+	}
+	u1 := User{
+		ID:	1,
+		FirstName: "Arthur",
+		LastName:  "Dent",
+	}
+	u2 := User{
+		ID:	2,
+		FirstName:  "Ford",
+		LastName:  "Prefect",
+	}
+	if u1.ID == u2.ID{
+		println("Same user!")
+	} else if u1.FirstName == u2.FirstName {
+		println("Similar user.")
+	} else {
+		println("Differnet users!")
+	}
+*/
+//Switch Statements
+/*
+type HTTPRequest struct{
+		Method string
+	}
+	r := HTTPRequest {Method: "HEAD"}
+
+	//go has implicit breaks, use fallthrough to go under.
+	switch r.Method{
+	case "GET":
+		println("Get request")
+	case "DELETE":
+		println("Delete request")
+	case "POST":
+		println("Post request")
+	case "PUT":
+		println("Put request")
+	default:
+		println("Unandled method")
 	}
 */
