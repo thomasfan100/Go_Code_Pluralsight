@@ -89,6 +89,7 @@ const (
 	fmt.Println(arr2)
 */
 //Slice
+//slice := make([]int , 5)
 /*
 	arr := [3]int{1,2,3}
 
@@ -113,6 +114,7 @@ const (
 	fmt.Println(s2,s3,s4)
 */
 //Maps
+//m := make(map[string]int)
 /*
 	m := map[string]int{"foo":42}
 	fmt.Println(m)
