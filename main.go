@@ -1,6 +1,7 @@
 package main
 
 //ctrl+c to exit code run
+//http://localhost:3000/users
 import (
 	"net/http"
 

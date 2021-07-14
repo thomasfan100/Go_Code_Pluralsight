@@ -29,7 +29,7 @@ func (uc userController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	} else {
 		matches := uc.userIDPattern.FindStringSubmatch(r.URL.Path)
 		if len(matches) == 0 {
-			w.WriteHeader(http.StatusNotFound)
+			w.WriteHeader(http.StatusNotImplemented)
 		}
 		id, err := strconv.Atoi(matches[1])
 		if err != nil {
@@ -45,6 +45,7 @@ func (uc userController) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		default:
 			w.WriteHeader(http.StatusNotImplemented)
 		}
+
 	}
 }
 
@@ -68,7 +69,7 @@ func (uc *userController) post(w http.ResponseWriter, r *http.Request) {
 	u, err := uc.parseRequest(r)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("Could not parse User object"))
+		w.Write([]byte("Could not parse User Object"))
 		return
 	}
 	u, err = models.AddUser(u)
@@ -86,12 +87,10 @@ func (uc *userController) put(id int, w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte("Could not parse User object"))
-		return
 	}
 	if id != u.ID {
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte("ID of submitted user must match ID in URL"))
-		return
 	}
 	u, err = models.UpdateUser(u)
 	if err != nil {
@@ -104,7 +103,7 @@ func (uc *userController) put(id int, w http.ResponseWriter, r *http.Request) {
 
 //allow us to delete a user in users collection
 func (uc *userController) delete(id int, w http.ResponseWriter) {
-	err := models.RemoveUserById(id)
+	err := models.RemoveUserByID(id)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
@@ -119,8 +118,7 @@ func (uc *userController) parseRequest(r *http.Request) (models.User, error) {
 	var u models.User
 	err := dec.Decode(&u)
 	if err != nil {
-		return models.User{}, http.ErrAbortHandler
-
+		return models.User{}, err
 	}
 	return u, nil
 }
@@ -128,6 +126,6 @@ func (uc *userController) parseRequest(r *http.Request) (models.User, error) {
 //constructor function
 func newUserController() *userController {
 	return &userController{
-		userIDPattern: regexp.MustCompile(`^/user/(\d+)/?`),
+		userIDPattern: regexp.MustCompile(`^/users/(\d+)/?`),
 	}
 }
